@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div class="header_login">
+    <b>登录</b>
+    <span onclick="reg()">注册</span>
+</div>
+<div class="content_login">
+    <div class="input_login">
+        <span>请输入手机号</span><br/>
+        <input id="phone" type="text" placeholder="请输入手机号"/>
+    </div>
+    <div class="input_login">
+        <span>请输入登录密码(6-20字符)</span><br/>
+        <input id="password" type="password" placeholder="请输入登录密码"/>
+    </div>
+    <!--<div class="input_login">
+        <p>忘记密码</p>
+    </div>-->
+</div>
+<div class="footer_login">
+    <div onclick="login();" class="footbtn">
+        <span>登&emsp;录</span>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="jsc/baseshareUrl.js"></script>
+<script>
+    // 截取问号传值
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+
+    var commodityId = getParam("commodityId");
+    var ifStartId = getParam("ifStartId");
+    var saveWay = getParam("saveWay");
+    var referee = getParam("referee");
+
+    function login() {
+        $.post("/api/login", {"phone": $("#phone").val(), "password": $("#password").val()}, function (xhr, res, h) {
+            if (1 == xhr.code) {
+                //设置Token
+                console.log(xhr);
+                var token = h.getResponseHeader("authorization");
+                localStorage.setItem('authorization', token);
+                location.href = "productDetailJoin.html?commodityId=" + commodityId + "&ifStartId=" + ifStartId + "&saveWay=" + saveWay + "&referee=" + referee;
+            } else {
+                alert(xhr.msg_cn);
+            }
+        })
+    }
+
+    var wechatreferee = "-commodityId_" + commodityId + "-ifStartId_" + ifStartId + "-saveWay_" + saveWay + "-referee_" + referee;
+
+    function reg() {
+        // 调起微信授权页面
+        var REDIRECT_URI = Base_url + "/wechart/getUni";
+        var APPID = "wx8b32f5a7fabe2c93";
+        window.location.href = ("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + APPID + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_userinfo&state=" + wechatreferee + "#wechat_redirect")
+    }
+</script>
+</html>

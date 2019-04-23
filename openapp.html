@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>打开APP</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<!--<div class="header_login">
+    <b>微信登录</b>
+    <span>注册</span>
+</div>-->
+<div class="footer_login">
+    <div onclick="opendapp(iphoneSchema,iosAppDownloadUrl,androidSchema,androidAppDownloadUrl)" class="wxfootbtn">
+        <span>打开APP</span><br/>
+    </div>
+    <!--<div class="wxfootbtn">
+        <span>账号密码登录</span><br/>
+    </div>-->
+</div>
+
+<!-- 提示浏览器打开 -->
+<style>
+    .pagealert {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        -webkit-transform: translateZ(0);
+        -webkit-overflow-scrolling: touch;
+        background-color: #999;
+        opacity: 0.9;
+        display: none
+    }
+
+    .pagealert {
+        width: 100%;
+    }
+</style>
+<div class="pagealert">
+    <img src="images/openpage.png">
+</div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    var iphoneSchema ='aizanzansavemoney://?commodityId=0&userId=0&sharetype=2';
+    var iosAppDownloadUrl='https://itunes.apple.com/cn/app/id1440019240?mt=8';
+    var androidSchema = 'aizanzansavemoney://likemoney?sharetype=2';
+    var androidAppDownloadUrl = 'https://itunes.apple.com/cn/app/id1440019240?mt=8';
+    // 判断是否微信打开
+    var is_weixin = (function () {
+        return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
+    })();
+    if (is_weixin) {
+        $(function () {
+            $(".pagealert").show();
+            return false;
+        });
+    }else {
+        // 自动打开APP跳转url
+        goto();
+    }
+
+    // 截取url问号传值
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    // 调起app
+    function goto() {
+        var iphoneSchema ='aizanzansavemoney://?commodityId='+commodityId+'&userId='+userId+'&sharetype=2';
+        // var iphoneSchema ='aizanzansavemoney://likemoney?commodityId='+commodityId+"&userId="+userId+"&sharetype=1";
+        var iosAppDownloadUrl='https://itunes.apple.com/cn/app/id1440019240?mt=8';
+        var androidSchema = 'aizanzansavemoney://likemoney?commodityId='+commodityId+'&userId='+userId+"&sharetype=2";
+        var androidAppDownloadUrl = 'https://itunes.apple.com/cn/app/id1440019240?mt=8';
+        opendApp(iphoneSchema,iosAppDownloadUrl,androidSchema,androidAppDownloadUrl);
+    }
+    /*
+            500ms内，本机有应用程序能解析对应的协议并打开程序，调用该应用；
+            如果本机没有应用程序能解析该协议或者500ms内没有打开这个程序，
+            则执行setTimeout里面的function，跳转到下载页面。
+
+            iosAppId: appId
+            iphoneSchema: IOS App 协议
+            iosAppDownloadUrl: IOS App 下载地址 https://itunes.apple.com/cn/app/id@appId@
+            androidSchema: Androind App 协议
+            androidAppDownloadUrl: Androind App 下载地址
+     */
+    function opendapp(iphoneSchema, iosAppDownloadUrl, androidSchema, androidAppDownloadUrl) {
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //IPhone
+            var loadDateTime = new Date();
+            window.setTimeout(function () {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 800) {
+                    // window.location = iosAppDownloadUrl.replace("@appId@", iosAppId);
+                    window.location = iosAppDownloadUrl //IOS App 下载地址
+                } else {
+                    window.close();
+                }
+            }, 800);
+            window.location = iphoneSchema; //IOS App 协议
+        } else if (navigator.userAgent.match(/android/i)) {//Androind
+            try {
+                setTimeout(function () {
+                    window.location = androidAppDownloadUrl; //Androind App 下载地址
+                }, 800);
+                window.location = androidSchema; //Androind App 协议
+            } catch (e) {
+
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>

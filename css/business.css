@@ -1,0 +1,92 @@
+/* 商学院 */
+html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100%;
+    width: 100%;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: #fff;
+    font-family: "Microsoft YaHei";
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+a {
+    color: unset;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.content .list {
+    width: 90%;
+    margin: 15px auto;
+    min-height: 60px;
+    line-height: 30px;
+    border-top: 2px solid #eee;
+}
+
+.content .list .title {
+    font-size: 16px;
+    padding: 0 0 0 58px;
+    box-sizing: border-box;
+    margin: 10px 0 0 0;
+    height: 50px;
+    position: relative;
+    line-height: 50px;
+}
+
+.content .list .title img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 0px;
+}
+
+.content .list .answer {
+    color: #888;
+    padding: 0;
+    margin: 0;
+}
+
+/* 详情页 */
+.text {
+    width: 90%;
+    margin: 15px auto;
+    min-height: 60px;
+    line-height: 30px;
+}
+
+.text .title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.text .info {
+    padding-top: 5px;
+    box-sizing: border-box;
+    border-top: 2px solid #eee;
+}
+
+.text img {
+    width: 100% !important;
+    height: auto !important;
+}

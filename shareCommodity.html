@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>商品详情</title>
+</head>
+<body>
+<div class="mod mod-js">
+	<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js"></script>
+	<script src="js/clipboard.min.js"></script>
+	<script>
+		var mytimer;
+
+		function myhide(myclass) {
+			var sdata = document.getElementsByClassName("nav-icon")[0];
+			if(sdata) {
+				sdata.style.display = 'none';
+				clearInterval(mytimer)
+			}
+		}
+
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for(var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable) {
+					return unescape(pair[1])
+				}
+			}
+			return(false)
+		}
+
+		function weixinTitle(tit) {
+			var $body = $('body');
+			document.title = tit;
+			var $iframe = $('<iframe src="/favicon.ico">');
+			$iframe.on('load', function() {
+				setTimeout(function() {
+					$iframe.off('load').remove();
+				}, 0);
+			}).appendTo($body);
+		}
+		_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+		this.decode = function(input) {
+			var output = "";
+			var chr1, chr2, chr3;
+			var enc1, enc2, enc3, enc4;
+			var i = 0;
+			//input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+			while(i < input.length) {
+				enc1 = _keyStr.indexOf(input.charAt(i++));
+				enc2 = _keyStr.indexOf(input.charAt(i++));
+				enc3 = _keyStr.indexOf(input.charAt(i++));
+				enc4 = _keyStr.indexOf(input.charAt(i++));
+				chr1 = (enc1 << 2) | (enc2 >> 4);
+				chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+				chr3 = ((enc3 & 3) << 6) | enc4;
+				output = output + String.fromCharCode(chr1);
+				if(enc3 != 64) {
+					output = output + String.fromCharCode(chr2);
+				}
+				if(enc4 != 64) {
+					output = output + String.fromCharCode(chr3);
+				}
+			}
+			output = _utf8_decode(output);
+			return output;
+		}
+		_utf8_decode = function(utftext) {
+			var string = "";
+			var i = 0;
+			var c = c1 = c2 = 0;
+			while(i < utftext.length) {
+				c = utftext.charCodeAt(i);
+				if(c < 128) {
+					string += String.fromCharCode(c);
+					i++;
+				} else if((c > 191) && (c < 224)) {
+					c2 = utftext.charCodeAt(i + 1);
+					string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+					i += 2;
+				} else {
+					c2 = utftext.charCodeAt(i + 1);
+					c3 = utftext.charCodeAt(i + 2);
+					string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+					i += 3;
+				}
+			}
+			return string;
+		}
+		eval(function(p, a, c, k, e, r) {
+			e = function(c) {
+				return c.toString(a)
+			};
+			if(!''.replace(/^/, String)) {
+				while(c--) r[e(c)] = k[c] || e(c);
+				k = [function(e) {
+					return r[e]
+				}];
+				e = function() {
+					return '\\w+'
+				};
+				c = 1
+			};
+			while(c--)
+				if(k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
+			return p
+		}('h 5=j f(\'#g\');5.9(\'i\',3(e){1.4(\'b:\',e.d);1.4(\'l:\',e.s);1.4(\'a:\',e.0);e.0.6="复制成功，打开【手綯】购买";e.0.7.8="#k";e.0.c=m;n(3(){e.0.6="一键复制";e.0.7.8="#o";e.0.c=p},q);e.r()});5.9(\'2\',3(e){1.2(\'b:\',e.d);1.2(\'a:\',e.0);e.0.6="复制失败,请手动复制";e.0.7.8="#t"});', 30, 30, 'trigger|console|error|function|info|clipboard|innerHTML|style|backgroundColor|on|Trigger|Action|disabled|action||ClipboardJS|icopy|var|success|new|7dc57d|Text|true|setTimeout|fd643d|false|2000|clearSelection|text|b5b4b4'.split('|'), 0, {}))
+		eval(function(p, a, c, k, e, r) {
+			e = function(c) {
+				return(c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36))
+			};
+			if(!''.replace(/^/, String)) {
+				while(c--) r[e(c)] = k[c] || e(c);
+				k = [function(e) {
+					return r[e]
+				}];
+				e = function() {
+					return '\\w+'
+				};
+				c = 1
+			};
+			while(c--)
+				if(k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
+			return p
+		}('$(B(){4 f=u("O");D.E("O:"+f);7(!f){4 g="1C"}y{4 g=K(f)}$(\'#17\').9(g);4 h=$(\'#17\').9();D.E("1n:"+h);4 i=u(h);i=i.1m(/\\w+/);i=i.1k().5("￥","");i=i.5("￥","");i=i.5("《","");i=i.5("《","");i=i.5("🎵","");i=i.5("🎵","");i=i.5("💰","");i=i.5("💰","");i=i.5("✔","");i=i.5("✔","");i=i.5("🔐","");i=i.5("🔐","");i=i.5("😺","");i=i.5("😺","");4 j=u(\'1o\');7(!j){4 j=\'1\'}y{j=j.1k()}7(j==\'1\'){4 k=[\'🎵\',\'💰\',\'✔\',\'🔐\',\'😺\'];4 l=C.19(C.16()*k.X+1)-1;4 m=C.19(C.16()*k.X+1)-1;i=k[l]+i+k[m]}7(j==\'2\'){i="("+i+")"}7(j==\'3\'){i="￥"+i+"￥"}D.E("1R:"+i);4 n=$(\'#I-J\').9();$(\'#I-J\').9(n+i);$("#1U").9(i);4 o=u(\'M\');7(o){D.E("M:"+o);4 p="8://1T.m.H.G/1L/Q.H.R.S/6.0/?1K=Q.H.R.S&v=6.0&W=F&1J=1I%1H.6.0&1G=1F&13=F&1E=15&x=%1A%1z%22%1y%22"+o+"%22%1x";$.1w({1v:p,13:\'1u\',W:\'F\',1t:\'15\',1s:B(a){7(a.1r[0]=="1q::调用成功"){7(1p a.x.z.1j!=\'1l\'){4 b="8:"+a.x.z.1j[0];b=b.5("8:8:","8:");$(\'#t\').s(\'A\',b)}y{4 b="8://1i.L.G/1h/1g/1f/1e/25/1d/1c/1b/1a.18";$(\'#t\').s(\'A\',b)}4 c=a.x.z.1B;4 d=a.x.z.1D;7(c){14(c);$("#12").9(c)}7(d){14(d);$("#12").9(d)}}y{4 b="8://1i.L.G/1h/1g/1f/1e/25/1d/1c/1b/1a.18";$(\'#t\').s(\'A\',b)}}})}y{$(\'#t\').s(\'11\',\'10-Z:Y V U T(21, 0, P, .0);\')}1M=1N(B(){1O(K(\'1P==\'))},1Q);4 q=u("1S");7(q){$("#t").s(\'A\',K(q));$(\'#t\').s(\'11\',\'10-Z:Y V U T(21, 0, P, .1);\')}4 r=N.1V(\'.I-J\');N.1W("1X",B(e){1Y.1Z().20(r)},23);$("#24-26").27().28()});', 62, 133, '||||var|replace||if|https|html|||||||||||||||||||attr|img|getQueryVariable|||data|else|item|src|function|Math|console|log|jsonp|com|taobao|word|text|decode|360buyimg|sku|document|base|71|mtop|detail|getdetail|rgba|8px|4px|dataType|length|0px|shadow|box|style|tit|type|weixinTitle|mtopjsonp2|random|kls|gif|floor|3c96f05c90d565c1|5bd2ba59Ecfc66dd5|182359|12349|722|t1|jfs|da|img12|images|toString|undefined|match|rekl|rand|typeof|SUCCESS|ret|success|jsonpCallback|get|url|ajax|7D|3A|22itemNumId|7B|title|taowords|subtitle|callback|true|AntiCreep|40taobao_h5_6|2017|ttid|api|h5|mytimer|setInterval|myhide|YWQtY2xvc2Utd3JhcA|100|kl|pic|h5api|nbcopy|querySelector|addEventListener|selectionchange|window|getSelection|selectAllChildren|||false|phone||main|next|hide'.split('|'), 0, {}))
+	</script>
+</div>
+<div style="display:none;" id="kls">taowords</div>
+<div style="position: fixed;top:-10000px;" id="nbcopy"></div>
+<div class="mod mod-html">
+	<style type="text/css">
+		.container {
+			padding: 14px 14px 0
+		}
+		
+		.container img {
+			box-shadow: 0 4px 8px rgba(21, 0, 71, .1);
+			width: 100%;
+			border-radius: 10px
+		}
+		
+		.beatword {
+			margin: 14px;
+			margin-top: 1pc;
+			text-align: center
+		}
+		
+		.word-border {
+			background: #fff1ef;
+			border: 2px dashed #df7162;
+			padding: 10px;
+			color: #df7162;
+			font-size: 14px;
+			text-align: left;
+			border-radius: 10px
+		}
+		
+		.copy-tip {
+			text-align: left;
+			color: #8f8f8f;
+			font-size: 9pt;
+			clear: both
+		}
+		
+		.copy-tip span {
+			display: inline-block;
+			position: relative;
+			top: 2px;
+			left: -2px;
+			width: 20px;
+			height: 10px;
+			margin: 0 4px;
+			border: 1px dashed #df7162
+		}
+		
+		.icopy {
+			background-image: linear-gradient(to right, #fbaa58, #fa4dbe);
+			border-radius: 750pt;
+			color: #fff;
+			font-size: 18px;
+			margin: 10px auto;
+			padding: 5px 10px;
+			height: 35px;
+			line-height: 35px;
+			width: 260px
+		}
+		
+		.kz-float-layer {
+			height: 0!important;
+			display: none!important
+		}
+		
+		button,
+		input,
+		select,
+		textarea {
+			outline: 0;
+			border: none;
+			background: #ccc
+		}
+	</style>
+	<div class="container" id="img">
+		<!--<img id="imgUrl" src="https://img12.360buyimg.com/da/jfs/t1/722/25/12349/182359/5bd2ba59Ecfc66dd5/3c96f05c90d565c1.gif">-->
+	</div>
+	<div style="text-align:center;padding-top:15px;font-size:14px" id="tit"></div>
+	<div class="beatword">
+		<div class="word-border">
+			<div>
+				<div id="word-text" class="word-text" style="text-align:center"></div>
+			</div>
+		</div>
+		<!--data-clipboard-target="#nbcopy" class="icopy" id="icopy"-->
+		<div type="button" class="icopy" id="icopy" data-clipboard-action="copy" data-clipboard-target="#word-text" onclick="">一键复制</div>
+		<div id="copy-tip" class="copy-tip">说明：<br>在点击一键复制后，请打开<img style="width:16px;height:16px" src="http://wx4.sinaimg.cn/large/9ccca90bgy1fm6sw25k33j200w00wq2q.jpg">"购买<br>若一键复制失败，请长按 <span></span>内文字全选复制拷贝</div>
+	</div>
+</div>
+<script>
+	var userId = getParam("userId");
+    var commodityId = getParam("commodityId");
+    var sptype = getParam("sptype");
+    
+	// 截取url问号传值
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    
+    if(sptype == 1){
+    	$.post("dTKTop/finddtksp",{"id":commodityId,"userId":userId},function (res) {
+			if (200==res.code){
+			    console.log(res);
+			    //获取商品图片
+				var imgUrl = res.data.Pic;
+	            var imgUrls = imgUrl.split(",");
+	            if(imgUrls.length>0){
+	                $("#img").append("<div class=\"swiper-slide\">\n" +
+	                    "\t\t\t\t\t<img src="+imgUrls[0]+" alt=\"\">\n" +
+	                    "\t\t\t\t</div>");
+				}
+				var str = res.data.str;
+				if (null!=str && ""!=str){
+				    $("#word-text").html(str);
+				}
+			}
+	    })
+    }else{
+    	$.post("dTKTop/findhdksp",{"id":commodityId,"userId":userId},function (res) {
+			if (200==res.code){
+			    console.log(res);
+			    //获取商品图片
+				var imgUrl = res.data.itempic;
+	            var imgUrls = imgUrl.split(",");
+	            if(imgUrls.length>0){
+	                $("#img").append("<div class=\"swiper-slide\">\n" +
+	                    "\t\t\t\t\t<img src="+imgUrls[0]+" alt=\"\">\n" +
+	                    "\t\t\t\t</div>");
+				}
+                var str = res.data.str;
+                if (null!=str && ""!=str){
+                    $("#word-text").html(str);
+                }
+			}
+	    })
+    }
+
+    var clipboard = new ClipboardJS('.icopy');
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+        $("#icopy").html("复制成功");
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+
+</script>
+</body>

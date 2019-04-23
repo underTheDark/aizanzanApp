@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>高手进阶</title>
+    <link rel="stylesheet" href="css/business.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <!-- <div class="list">
+        <b> <p class="title">规则标题</p> </b>
+        <p class="answer">规则简介</p>
+      </div> -->
+    </div>
+</body>
+<script>
+    var page_type = "2"; // 类型 1新手2高手3经验分享4视频教程5平台规则6精品推荐
+    var title = ""; // 平台规则标题
+    var description = ""; // 平台规则描述
+    var context = ""; // 平台规则内容
+    var img = ""; // 平台规则图片
+    function getdata() {
+        $.ajax({
+            url: "commercialCollege/listByTypeArticle",
+            type: "POST",
+            dataType: "json",
+            data: {
+                type: page_type
+            },
+            success: function (res) {
+                console.log(res.data);
+                for (i = 0; i < res.data.length; i++) {
+                    console.log(res.data[i].commercialCollegeArticleId);
+                    title = res.data[i].title;
+                    description = res.data[i].description;
+                    context = res.data[i].context;
+                    img = res.data[i].img;
+                    $(".content").append(
+                        "<div class='list' id='" + res.data[i].commercialCollegeArticleId + "'>" +
+                        "<b>" +
+                        "<p class='title'><img src='"+ res.data[i].viewImg +"' />" + title +
+                        "</p>" +
+                        "</b>" +
+                        "<p class='answer'>" +
+                        description +
+                        "</p>" +
+                        "</div"
+                    );
+                }
+
+                $(".list").click(function () {
+                    console.log($(this).attr("id"));
+                    var id = $(this).attr("id");
+                    window.location.href = "business_content.html?commercialCollegeArticleId=" + id;
+                });
+            },
+            error: function (data) {
+                // alert(data.msg_cn);
+            }
+        });
+    }
+    window.onload = getdata();
+</script>
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>商品详情</title>
+	<link rel="stylesheet" href="css/weui.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="navbar">
+		<div class="tab01 navbar-item navbar-item-on">
+			<a href="#product">商品</a>
+		</div>
+		<div class="tab02 navbar-item">
+			<a href="#information">详情</a>
+		</div>
+		<div class="tab03 navbar-item">
+			<a href="#comment">评论</a>
+		</div>
+	</div>
+	<div class="navbar-con" id="product">
+		<div class="h45"></div>
+		<!-- 轮播 -->
+		<div class="swiper-container">
+			<div id="imgUrl" class="swiper-wrapper">
+				<!--<div class="swiper-slide">-->
+					<!--<img src="images/test2.jpg" alt="">-->
+				<!--</div>-->
+				<!--<div class="swiper-slide">-->
+					<!--<img src="images/test.jpg" alt="">-->
+				<!--</div>-->
+				<!--<div class="swiper-slide">-->
+					<!--<img src="images/test2.jpg" alt="">-->
+				<!--</div>-->
+			</div>
+		</div>
+		<!-- 客服按钮 -->
+		<div class="btnGroup">
+			<img class="btnGimg-1" src="images/product.png" alt="" />
+			<img class="btnGimg-2" src="images/kefu.png" alt="" />
+		</div>
+		<!-- 商品信息 -->
+		<div class="proInfor">
+			<p>
+				<span id="name" class="pro-name"></span>
+				<span id="basePrice" class="pro-money">0</span>
+				<span class="pro-money">¥</span>
+			</p>
+			<!--<p  id="comment">
+				<img class="addressImg" src="images/address.png" />
+				<span class="adderssText">送至：</span>
+				<span id="address" class="adderssText">天津市南开区华苑406</span>
+				<img class="setImg" src="images/unlove.png" />
+			</p>-->
+		</div>
+		<!-- 评论 -->
+		<div id="comComment" class="comment">
+			<!-- 评论信息统计 -->
+			<div class="comment-title">
+				<span class="col-1">用户评价(</span>
+				<span id="commentCount" class="col-1">1688</span>
+				<span class="col-1">)</span>
+				<span class="col-2">好评</span>
+				<span class="col-3">%</span>
+				<span id="goodPercent" class="col-3">0</span>
+			</div>
+			<!-- 展示评论列表 -->
+			<div id="comment1" class="comment-con">
+				<div class="comment-infor">
+					<!-- 头像 -->
+					<div id="headimg1" class="head-image">
+						<img src="images/headimage.png" />
+					</div>
+					<!-- 用户名 -->
+					<div id="nickname1" class="comment-user">
+						暂无
+					</div>
+					<div id="buytime1" class="comment-date">
+
+					</div>
+					<!-- 好评星级 -->
+					<div id="comScore1" class="comment-star">
+					</div>
+				</div>
+				<!-- 评论内容 -->
+				<div id="context1" class="comment-text">
+
+				</div>
+				<!-- 评论图片 -->
+				<div id="commentImgUrl1" class="comment-img">
+				</div>
+				<!-- 商品类型 -->
+				<div class="comment-type">
+					<span class="typetext-1">类型:</span>
+					<span id="specName1" class="typetext-2"></span>
+				</div>
+			</div>
+		</div>
+		<!-- 评论下方查看更多按钮 -->
+		<div class="lookmore" id="information">
+			查看更多
+		</div>
+		
+	</div>
+	<!-- 商品详情 -->
+	<div class="product-infor">
+			<div class="product-title">
+				<div class="leftline"></div>
+				<b>详情展示</b>
+				<div class="rightline"></div>
+			</div>
+			<div id="commodityCcontext" class="product-text">
+				<!--<img src="images/test2.jpg" />
+				<span>
+					商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情
+				</span>
+				<img src="images/test2.jpg" />
+				<span>
+					商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情
+				</span>
+				<img src="images/test2.jpg" />
+				<span>
+					商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情商品详情
+				</span>-->
+			</div>
+		</div>
+		<!-- 页面底部按钮 -->
+		<div class="h60"></div>
+		<div class="btn-con">
+			<div id="buyBtn" onclick="goto();" class="btnpink">
+				<span>直接购买</span>
+			</div>
+			<div id="buySaveBtn" onclick="goto();" class="btngreen">
+				<!--¥<b>1500</b><br />-->
+				<span>攒买价</span>
+			</div>
+			<div id="buyTeamBtn" onclick="goto();" class="btnblue">
+				<!--¥<b>2000</b><br />-->
+				<span>团攒价</span>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="navbar-con" style="display:none;">选项卡2</div>
+	<div class="navbar-con" style="display:none;">选项卡3</div> -->
+
+	<!-- 提示浏览器打开 -->
+	<style>
+		.pagealert {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			-webkit-transform: translateZ(0);
+			-webkit-overflow-scrolling: touch;
+			background-color: #999;
+			opacity: 0.9;
+            z-index: 999;
+			display: none;
+		}
+		.pagealert {
+			width: 100%;
+		}
+	</style>
+	<div class="pagealert">
+		<img src="images/openpage.png">
+	</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+<!-- 点击切换选项卡 -->
+<script src="js/style.js"></script>
+<script>
+
+	// 截取url问号传值
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    var userId = getParam("userId");
+    var commodityId = getParam("commodityId");
+
+    $.post("commodity/findCommodity",{"commodityId":commodityId},function (res) {
+		if (1==res.code){
+		    console.log(res);
+		    //按钮判断
+			var commoditytype = res.data.commodityOne.commoditytype;
+			if(commoditytype.indexOf("2")!=-1){
+			    $("#buyTeamBtn").show();
+			}else{
+                $("#buyTeamBtn").hide();
+			}
+		    //获取商品图片
+			var imgUrl = res.data.commodityOne.img_url;
+            var imgUrls = imgUrl.split(",");
+            for (var i=0;i<imgUrls.length;i++){
+                $("#imgUrl").append("<div class=\"swiper-slide\">\n" +
+                    "\t\t\t\t\t<img src="+imgUrls[i]+" alt=\"\">\n" +
+                    "\t\t\t\t</div>");
+			}
+
+            // 轮播
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay: 3000,
+                autoplayStopOnLast: false,
+                loop: true
+            });
+
+		    $("#name").text(res.data.commodityOne.name);
+            $("#basePrice").text(res.data.commodityOne.baseprice);
+            $("#commentCount").text(res.data.commodityOne.commentCount);
+            //好评率
+            if(res.data.commodityOne.commentCount != 0){
+                var goodPercent = (res.data.commodityOne.commentCount / res.data.commodityOne.commentGoodCount) * 100;
+                $("#goodPercent").text(goodPercent);
+            }
+            //评价
+			var commentList = res.data.commentList;
+			if (null!=commentList && commentList.length>0){
+                $("#headimg1").attr("src",commentList[0].headimg);
+                console.log(commentList[0].nikename);
+                $("#nickname1").html(commentList[0].nikename);//commentList[i].
+                $("#buytime1").html(commentList[0].buytime);
+                $("#context1").html(commentList[0].context);
+                $("#specName1").html(commentList[0].specName);
+                //星级
+                var comScore = commentList[0].com_score;
+                for (var j=0;j<5;j++){
+                    if (j<comScore){
+                        $("#comScore1").append("<img src=\"images/star.png\" />");
+                    }else{
+                        $("#comScore1").append("<img src=\"images/nullstar.png\" />");
+                    }
+                }
+                //评论图片
+                var commentImgUrl = commentList[0].img_url;
+                var commentImgUrls = commentImgUrl.split(",");
+                for (var j=0;j<commentImgUrls.length;j++){
+                    $("#commentImgUrl1").append("<img src="+commentImgUrls[j]+" />");
+                }
+			}
+			$("#commodityCcontext").html(res.data.comInfo.context);
+		}
+    })
+	function goto() {
+        // 判断是否微信打开
+        var is_weixin = (function(){return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1})();
+        if(is_weixin){
+            $(function(){
+                $(".pagealert").show();
+                $(".navbar").hide();
+                $(".navbar-con").hide();
+                $(".product-infor").hide();
+            });
+        }else{
+            var iphoneSchema ='aizanzansavemoney://?commodityId='+commodityId+'&userId='+userId+'&sharetype=1';
+            // var iphoneSchema ='aizanzansavemoney://likemoney?commodityId='+commodityId+"&userId="+userId+"&sharetype=1";
+            var iosAppDownloadUrl='https://itunes.apple.com/cn/app/id1440019240?mt=8';
+            var androidSchema = 'aizanzansavemoney://likemoney?commodityId='+commodityId+"&sharetype=1";
+            var androidAppDownloadUrl = 'https://itunes.apple.com/cn/app/id1440019240?mt=8';
+            opendApp(iphoneSchema,iosAppDownloadUrl,androidSchema,androidAppDownloadUrl);
+		}
+    }
+	
+    /*
+            500ms内，本机有应用程序能解析对应的协议并打开程序，调用该应用；
+            如果本机没有应用程序能解析该协议或者500ms内没有打开这个程序，
+            则执行setTimeout里面的function，跳转到下载页面。
+
+            iosAppId: appId
+            iphoneSchema: IOS App 协议
+            iosAppDownloadUrl: IOS App 下载地址 https://itunes.apple.com/cn/app/id@appId@
+            androidSchema: Androind App 协议
+            androidAppDownloadUrl: Androind App 下载地址
+     */
+    function opendApp( iphoneSchema, iosAppDownloadUrl, androidSchema, androidAppDownloadUrl){
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //IPhone
+            var loadDateTime = new Date();
+            window.setTimeout(function() {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 800) {
+                    // window.location = iosAppDownloadUrl.replace("@appId@", iosAppId);
+                    window.location.href = iosAppDownloadUrl //IOS App 下载地址
+                } else {
+                    window.close();
+                }
+            },800);
+            window.location = iphoneSchema; //IOS App 协议
+        }else if (navigator.userAgent.match(/android/i)) {//Androind
+            try {
+                setTimeout(function(){
+                    window.location.href = androidAppDownloadUrl; //Androind App 下载地址
+                },800);
+                window.location.href =  androidSchema; //Androind App 协议
+            } catch(e) {
+
+			}
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单</title>
+    <link rel="stylesheet" href="css/help.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+<div class="header_order">
+    <b>助力</b>
+</div>
+<div class="comcon" style="width: 100%"></div>
+<div class="helpbtn" onclick="helpbtn()">
+    给好友助个力
+</div>
+<div class="helptable">
+    <span class="helptitle">助力榜</span>
+    <table class="datatable">
+    </table>
+</div>
+<script src="jsc/baseshareUrl.js"></script>
+<script>
+    function getParam(paramName) {
+        // 截取地址栏字符串
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+
+    var helpmessage = "msg_cn";// 助力回传信息
+    var userOrderId = getParam("userOrderId");// 获取用户订单ID
+    var commprice = "";// 商品价格
+    var commimg = "";// 商品图片
+    var commheadimg = "";// 用户头像
+    var commnikename = "";// 商品昵称
+
+    $.post("commodity/inOrderHelpUrl", {"userOrderId": "75"}, function (res) {
+        console.log(res);
+        if (res.code == 1) {
+            commname = res.data.name;
+            commprice = res.data.price;
+            commimg = res.data.img_url;
+            commheadimg = res.data.headimg;
+            commnikename = res.data.nikename;
+            $(".comcon").append(''
+                + '<div class="user_info">'
+                + '<img src="' + commheadimg + '" />'
+                + '<span class="user_name">' + commnikename + '</span>'
+                + '</div>'
+                + '<div class="comm_order">'
+                + '<div class="comm_left">'
+                + '<img src="' + commimg + '" />'
+                + '</div>'
+                + '<div class="comm_right">'
+                + '<span id="commid" class="comm_right_span">' + commname + '</span>'
+                + '<span id="commprice">' + commprice + '</span><span>元</span>'
+                + '</div>'
+                + '</div>'
+            );
+
+            var help_list = res.data.helpList;
+            for (var i = 0; i < help_list.length; i++) {
+                console.log(help_list[i].userOrderHelpId)
+                // console.log(value[j].userOrderHelpId)
+                var helpmoney = help_list[i].helpMoney;
+                var helpval = help_list[i].headImgUrl;
+                var helpname = help_list[i].nickName;
+                $(".datatable").append(''
+                    + '<tr>'
+                    + '<td class="border_r t_l">'
+                    + '<img src="' + helpval + '" />'
+                    + '<span>' + helpname + '</span>'
+                    + '</td>'
+                    + '<td class="t_c">'
+                    + '砍掉<span>' + helpmoney + '</span>元'
+                    + '</td>'
+                    + '</tr>'
+                );
+            }
+        }
+    })
+
+    function helpbtn() {
+        // 调起微信授权页面
+        var REDIRECT_URI = Base_url + "/commodity/clickUserOrderHelp?userOrderId=" + userOrderId;
+        var APPID = "wx8b32f5a7fabe2c93";
+        window.location.href = ("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + APPID + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_userinfo&state=" + userOrderId + "#wechat_redirect")
+    }
+</script>
+</body>
+</html>

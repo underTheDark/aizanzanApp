@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* 规格css */
+        .fenle_icon {
+            line-height: 30px;
+        }
+
+        .fenlei_choose {
+            font-size: 16px;
+            color: #999;
+            width: 100%;
+            display: block;
+        }
+
+        .guige_con {
+            min-height: 30px;
+            overflow: hidden;
+        }
+
+        .guige_name {
+            width: 15%;
+            display: block;
+            float: left;
+        }
+
+        .shuxing_name {
+            min-height: 30px;
+            width: 85%;
+            float: right;
+            margin-bottom: 5px;
+        }
+
+        .shuxing_span {
+            width: 40px;
+            height: 20px;
+            line-height: 20px;
+            display: block;
+            font-size: 12px;
+            float: left;
+            border-radius: 12px;
+            text-align: center;
+            margin: 4px 10px;
+            border: 1px solid #999;
+            color: #999;
+        }
+
+        .chooseon {
+            border: 1px solid #33ccff !important;
+            background-color: #33ccff !important;
+            color: #fff !important;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="navbar">
+    <div class="tab01 navbar-item navbar-item-on">
+        <a href="#product">商品</a>
+    </div>
+    <div class="tab02 navbar-item">
+        <a href="#information">详情</a>
+    </div>
+    <div class="tab03 navbar-item">
+        <a href="#comment">评论</a>
+    </div>
+</div>
+<div class="navbar-con" id="product">
+    <div class="h45"></div>
+    <!-- 轮播 -->
+    <div class="swiper-container">
+        <div id="imgUrl" class="swiper-wrapper">
+        </div>
+    </div>
+    <!-- 客服按钮 -->
+    <div class="btnGroup">
+        <img class="btnGimg-1" src="images/product.png" alt=""/>
+        <img class="btnGimg-2" src="images/kefu.png" alt=""/>
+    </div>
+    <!-- 商品信息 -->
+    <div class="proInfor">
+        <p>
+            <span id="name" class="pro-name"></span>
+            <span id="basePrice" class="pro-money">0</span>
+            <span class="pro-money">¥</span>
+        </p>
+        <div class="fenle_icon">
+            <span class="fenlei_choose">选择分类</span>
+            <!--<div class="guige_con">-->
+            <!--<div class="guige_name"></div>-->
+            <!--<div class="shuxing_name">-->
+            <!--&lt;!&ndash;<span onclick="guigeclick()" class="shuxing_span">白色</span>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <!-- 评论 -->
+    <div id="comComment" class="comment">
+        <!-- 评论信息统计 -->
+        <div class="comment-title">
+            <span class="col-1">用户评价(</span>
+            <span id="commentCount" class="col-1">1688</span>
+            <span class="col-1">)</span>
+            <span class="col-2">好评</span>
+            <span class="col-3">%</span>
+            <span id="goodPercent" class="col-3">0</span>
+        </div>
+        <!-- 展示评论列表 -->
+        <div id="comment1" class="comment-con">
+            <div class="comment-infor">
+                <!-- 头像 -->
+                <div id="headimg1" class="head-image">
+                    <img src="images/headimage.png"/>
+                </div>
+                <!-- 用户名 -->
+                <div id="nickname1" class="comment-user">
+
+                </div>
+                <div id="buytime1" class="comment-date">
+                    2018-10-10
+                </div>
+                <!-- 好评星级 -->
+                <div id="comScore1" class="comment-star">
+                </div>
+            </div>
+            <!-- 评论内容 -->
+            <div id="context1" class="comment-text">
+                暂无评论
+            </div>
+            <!-- 评论图片 -->
+            <div id="commentImgUrl1" class="comment-img">
+            </div>
+            <!-- 商品类型 -->
+            <div class="comment-type">
+                <span class="typetext-1">类型:</span>
+                <span id="specName1" class="typetext-2"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 评论下方查看更多按钮 -->
+    <div class="lookmore" id="information">
+        查看更多
+    </div>
+    <div>
+        <img>
+    </div>
+
+</div>
+<!-- 商品详情 -->
+<div class="product-infor">
+    <div class="product-title">
+        <div class="leftline"></div>
+        <b>详情展示</b>
+        <div class="rightline"></div>
+    </div>
+    <div id="commodityCcontext" class="product-text">
+    </div>
+</div>
+<!-- 页面底部按钮 -->
+<div class="h60"></div>
+<div class="btn-con">
+    <div onclick="joinOrder()" class="btnpink2">
+        <span>参与攒买</span>
+    </div>
+    <!--<div class="btngreen">
+        ¥<b>1500</b><br />
+        <span>攒钱购买</span>
+    </div>
+    <div class="btnblue">
+        ¥<b>2000</b><br />
+        <span>我要攒买</span>
+    </div>-->
+</div>
+<!-- <div class="navbar-con" style="display:none;">选项卡2</div>
+<div class="navbar-con" style="display:none;">选项卡3</div> -->
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+<!-- 点击切换选项卡 -->
+<script src="js/style.js"></script>
+<script>
+
+
+    // 截取链接问号传值
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+
+    var comSpecInfoList = null;
+    var referee = getParam("referee");
+    var ifStartId = getParam("ifStartId");
+    var saveWay = getParam("saveWay");
+    var commodityId = getParam("commodityId");
+
+    $.post("/api/commodity/findCommodity", {"commodityId": commodityId}, function (res) {
+        if (1 == res.code) {
+            console.log(res);
+            comSpecInfoList = res.data.comSpecInfoList;
+            //获取规格属性
+            var guigelist = res.data.comSpecList;
+            for (var i = 0; i < guigelist.length; i++) {
+                $.each(guigelist[i], function (key, value) {
+                    console.log(key);
+                    var b = true;
+                    for (var j = 0; j < value.length; j++) {
+                        var specname = "specname" + i;
+                        console.log(specname);
+                        if (value[j].specName == key) {
+                            var specid = "spec" + i + j;
+                            var specval = value[j].com_spec_repository_id;
+                            if (b) {
+                                $(".fenle_icon").append(''
+                                    + '<div class="guige_con">'
+                                    + '<div class="guige_name"><span>' + key + '</span></div>'
+                                    + '<div class="shuxing_name" id="' + specname + '">'
+                                    + '<span id=' + specid + ' name="' + specval + '" " onclick=\"guigeclick(' + specid + ')\" class=\"shuxing_span\">' + value[j].name + '</span>'
+                                    + '</div>'
+                                    + '</div>');
+                                b = false;
+                            } else {
+                                $("#" + specname).append('<span id=' + specid + ' name="' + specval + '" " onclick=\"guigeclick(' + specid + ')\" class=\"shuxing_span\">' + value[j].name + '</span>');
+                            }
+                        }
+                    }
+                });
+            }
+            console.log(guigelist);
+            //获取商品图片
+            var imgUrl = res.data.commodityOne.img_url;
+            var imgUrls = imgUrl.split(",");
+            for (var i = 0; i < imgUrls.length; i++) {
+                $("#imgUrl").append("<div class=\"swiper-slide\">\n" +
+                    "\t\t\t\t\t<img src=" + imgUrls[i] + " alt=\"\">\n" +
+                    "\t\t\t\t</div>");
+            }
+            //  轮播
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay: 3000,
+                autoplayStopOnLast: false,
+                loop: true
+            });
+            $("#name").text(res.data.commodityOne.name);
+            $("#basePrice").text(res.data.commodityOne.baseprice);
+            $("#commentCount").text(res.data.commodityOne.commentCount);
+            //好评率
+            if(res.data.commodityOne.commentCount != 0){
+                var goodPercent = (res.data.commodityOne.commentCount / res.data.commodityOne.commentGoodCount) * 100;
+                $("#goodPercent").text(goodPercent);
+            }
+            //评价
+            var commentList = res.data.commentList;
+            if (null!=commentList && commentList.length>0){
+                console.log(commentList[0].nikename);
+                // $("#headimg1").html(commentList[0].headimg);
+                $("#headimg1").attr("src",commentList[0].headimg);
+                $("#nickname1").html(commentList[0].nikename);//commentList[i].
+                $("#buytime1").html(commentList[0].buytime);
+                $("#context1").html(commentList[0].context);
+                $("#specName1").html(commentList[0].specName);
+                //星级
+                var comScore = commentList[0].com_score;
+                for (var j = 0; j < 5; j++) {
+                    if (j < comScore) {
+                        $("#comScore1").append("<img src=\"images/star.png\" />");
+                    } else {
+                        $("#comScore1").append("<img src=\"images/nullstar.png\" />");
+                    }
+                }
+                //评论图片
+                var commentImgUrl = commentList[0].img_url;
+                var commentImgUrls = commentImgUrl.split(",");
+                for (var j = 0; j < commentImgUrls.length; j++) {
+                    $("#commentImgUrl1").append("<img src=" + commentImgUrls[j] + " />");
+                }
+            }
+
+            $("#commodityCcontext").html(res.data.comInfo.context);
+        }
+    })
+    //点击参与攒买按钮
+    function joinOrder() {
+        console.log(this.location);
+        //判断登录
+        var token = localStorage.getItem("authorization");
+        if (null == token || "" == token) {
+            window.location.href = "login.html?commodityId=" + commodityId + "&ifStartId=" + ifStartId + "&saveWay=" + saveWay + "&referee=" + referee;
+        } else {
+            var btnlist = Array();
+            $(".chooseon").each(function () {
+                btnlist.push($(this).attr("name"));
+            });
+            var Speclist = btnlist.toString();// 获取规格属性选中项ID
+            console.log(Speclist);
+            var comSpecInfoId = null;
+            for (var i = 0; i < comSpecInfoList.length; i++) {
+                if (Speclist == comSpecInfoList[i].comSpecMsg) {
+                    comSpecInfoId = comSpecInfoList[i].comSpecInfoId;
+                }
+            }
+            // 进入地址添加页面
+            if (1 == saveWay) {//多买一
+                //调参与攒买接口
+                $.ajax({
+                    url: "/api/commodity/joinOrder",
+                    type: "POST",
+                    dataType: "json",
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        "authorization": "" + token
+                    },
+                    data: {
+                        ifStartId: ifStartId,
+                        comSpecInfoId: comSpecInfoId
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        alert(res.msg_cn);
+                        localStorage.setItem('authorization', '');
+                        window.location.href = "openapp.html?commodityId=" + commodityId;
+                    },
+                    error: function (res) {
+                        alert(res.msg_cn);
+                    }
+                });
+            } else {
+                // 多买多
+                if (null != Speclist && "" != Speclist) {
+                    // 获取规格属性
+                    window.location.href = "dingdan.html?commodityId=" + commodityId + "&ifStartId=" + ifStartId + "&saveWay=" + saveWay + "&referee=" + referee+"&comSpecInfoId="+comSpecInfoId;
+                } else {
+                    alert("请选择规格属性");
+                }
+            }
+        }
+    }
+
+    // 点击切换规格选中状态
+    function guigeclick(id) {
+        if ($(id).hasClass("chooseon")) {
+            $(id).removeClass("chooseon");
+        } else {
+            $(id).addClass("chooseon");
+            $(id).siblings().removeClass("chooseon");
+        }
+    }
+</script>
+
+</html>

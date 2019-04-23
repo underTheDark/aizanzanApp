@@ -1,0 +1,33 @@
+body {
+    margin: 0px;
+}
+
+.bgimg {
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+
+.logo {
+    width: 32%;
+    position: absolute;
+    left: 34%;
+    height: auto;
+    top: 22%;
+}
+
+.ios {
+    height: 8%;
+    position: absolute;
+    top: 61%;
+    left: 12%;
+    width: 76%;
+}
+
+.andriod {
+    height: 8%;
+    position: absolute;
+    top: 75%;
+    left: 12%;
+    width: 76%;
+}

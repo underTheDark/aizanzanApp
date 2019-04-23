@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div class="header_login">
+    <b>注册绑定</b>
+</div>
+<div class="content_login">
+    <div class="input_login">
+        <span>请输入手机号</span><br/>
+        <input id="tel" type="number" placeholder="请输入手机号"/>
+    </div>
+    <div class="input_login">
+        <div onclick="getchecknum" class="checknum">
+            获取验证码
+        </div>
+        <span>请输入验证码</span><br/>
+        <input id="checknum" type="number" placeholder="请输入验证码"/>
+    </div>
+    <div class="input_login">
+        <span>请设置登录密码(6-20字符)</span><br/>
+        <input id="psd" type="password" placeholder="请设置登录密码"/>
+    </div>
+    <div class="input_login">
+        <span>请设置支付密码(6位数字)</span><br/>
+        <input id="ppsd" type="payPassword" placeholder="请设置支付密码"/>
+    </div>
+    <!--<div class="input_login">-->
+    <!--<input id="checkbox" checked="checked" type="checkbox" class="agreecheckbox" />-->
+    <!--同意用户注册协议-->
+    <!--</div>-->
+</div>
+<div class="footer_reg">
+    <div onclick="regist()" class="footbtn">
+        <span>注&emsp;册</span>
+    </div>
+</div>
+</body>
+<script src="./js/jquery-1.11.3.min.js"></script>
+<script>
+    function getParam(paramName) {
+        // 截取地址栏字符串
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    function getchecknum() {
+        // 发送验证码
+        var tel = $("#tel").val();
+        $.post("/api/user/sendRegisterSMSCode", {"phone": tel}, function (res) {
+            if (1 == res.code) {
+                alert("已发送");
+            } else {
+                alert(res.msg_cn);
+            }
+        })
+    }
+    
+    function regist() {
+        var tel = $("#tel").val();
+        var checknum = $("#checknum").val();
+        var psd = $("#psd").val();
+        var ppsd = $("#ppsd").val();
+        var unionid = getParam("unionid");
+        var headimg = getParam("headimg");
+        var commodityId = getParam("commodityId");
+        var referee = getParam("referee");
+
+        $.post("/api/user/register", {
+            "phone": tel,
+            "password": psd,
+            "payPassword": ppsd,
+            "SMSCode": checknum,
+            "referee": referee,
+            "unionid": unionid,
+            "headimg": headimg
+        }, function (res) {
+            if (1 == res.code) {
+                //添加推荐人
+                $.post("/api/user/addrecommendnum", { "phone": tel}, function (res){
+                    window.location.href = "login.html?commodityId=" + commodityId + "&ifStartId=" + ifStartId + "&saveWay=" + saveWay + "&referee=" + referee;
+                })
+            } else {
+                alert(res.msg_cn);
+            }
+        })
+    }
+</script>
+
+</html>

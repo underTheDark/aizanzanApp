@@ -1,0 +1,185 @@
+
+        /* 订单页css */
+        html {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+        body {
+            min-height: 100%;
+            width: 100%;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background-color: #fff;
+            font-family:'Microsoft YaHei';
+            overflow: hidden;
+        }
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: unset;
+        }
+        .header_order {
+            width: 100%;
+            height: 45px;
+            line-height: 45px;
+            background-image: url("../images/header_bg.png");
+            background-size: 100% 100%;
+            color: #fff;
+            text-align: center;
+        }
+        .user_info{
+            width: 94%;
+            padding: 5px;
+            height: 30px;
+            margin: 15px auto 0 auto;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 3px #ccc;
+            border-radius: 3px;
+        }
+        .user_info img {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .helpbtn {
+            height: 60px;
+            line-height: 60px;
+            width: 94%;
+            font-size: 20px;
+            margin: 10px auto;
+            border-radius: 8px;
+            background-image: url(../images/helpbtn_bg.png);
+            background-size: 100% 100%;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0px 3px 24px 0px rgba(0, 0, 0, 0.15);
+        }
+        .helptable {
+            width: 94%;
+            line-height: 60px;
+            margin: 15px auto 2px auto;
+            color: #fff;
+            box-sizing: border-box;
+            min-height: 60px;
+            background-image: url(../images/paihang.png);
+            background-size: 100% 100%;
+            box-shadow: 0px 0px 20px 0px rgba(249, 69, 81, 0.68);
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+   		 	z-index: 999;
+        }
+        .helptitle {
+            display: block;
+            width: 100%;
+            font-size: 20px;
+        }
+        .show_table {
+            background: #fff;
+            width: 90%;
+            margin: 0 auto;
+            /* min-height: 40px; */
+            line-height: 50px;
+            font-size: 14px; 
+            box-shadow: 0px 3px 24px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 0 0 8px 8px;
+            font-size: 16px;
+        }
+
+        .show_table table {
+            border-collapse:collapse;
+            width: 100%;
+        }
+        .show_table table tr td {
+            width: 50%;
+            height: 50px;
+            line-height: 50px;
+        }
+        .t_r {
+            padding-right: 8%;
+            text-align: right;
+        }
+        .t_c {
+            text-align: center;
+        }
+
+        .t_r span {
+            color: #F40C64;
+        }
+
+        .t_l {
+            padding-left: 8%;
+            text-align: left;
+        }
+        .show_table table tr td img {
+            position: relative;
+            top: 8px;
+		    margin-right: 5px;
+		    width: 28px;
+		    height: 28px;
+            border-radius: 50%;
+        }
+        .comm_order {
+            width: 94%;
+            padding: 10px;
+            margin: 10px auto 15px auto;
+            box-sizing: border-box;
+            min-height: 130px;
+            background-color: #fff;
+            box-shadow: 0px 3px 24px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .comm_left {
+            width: 40%;
+            float: left;
+            box-shadow: 0 0 10px #bbb;
+        }
+
+        .comm_left img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0px 0px 10px #ccc
+        }
+
+        .comm_right {
+            float: left;
+            padding-left: 10px;
+            height: 100%;
+            width: 60%;
+            box-sizing: border-box;
+        }
+
+        .startprice {
+            width:50%;
+            height: 20px;
+            position: absolute       ;
+            bottom: 30px; 
+        }
+
+        #commprice {
+            color: #F40C64;
+        }
+        
+        .comm_right_span {
+            display: block;
+            height: 50%;
+            font-size: 18px;
+            line-height: 1;
+            width: 100%;
+            margin-top: 15%;
+            letter-spacing: 1px;
+        }

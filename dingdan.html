@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单</title>
+    <link rel="stylesheet" href="css/order.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <style>
+        .price {
+            display: inline;
+            float: left;
+            height: 25px;
+            line-height: 25px;
+        }
+        .price2 {
+            position: absolute;
+            right: 274px;
+            top: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="header_order">
+    <b>订单</b>
+</div>
+<div class="address_order">
+    <div class="rows-address">
+        <span>收货人：</span><input id="name" type="text"/>
+    </div>
+    <div class="rows-address">
+        <span>联系电话：</span><input id="telnum" type="text"/>
+    </div>
+    <div class="rows-address">
+        <span>地址：</span><input id="address" type="text"/>
+    </div>
+</div>
+<div class="comm_order">
+    <div class="comm_left">
+        <img src="images/test.jpg"/>
+    </div>
+    <div class="comm_right">
+        <span id="commid">商品名字--商品名字--商品名</span>
+        <span id="commguige">规格规格</span>
+        <span id="commprice">价格</span>
+        <span id="commnum">数量</span>
+        <span></span>
+    </div>
+</div>
+<div class="btn_order">
+    <div class="price">
+        <span>付款：¥</span>
+        <span class="realprice" id="realprice">0</span>
+        <span>元</span>
+    </div>
+    <div class="price2">
+        <span>邮费：¥</span>
+        <span class="realprice" id="youfei">0</span>
+        <span>元</span>
+    </div>
+    <div onclick="submitOrder()" class="sub_btn">
+        提交订单并打开APP查看
+    </div>
+</div>    
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
+    var commodityId = getParam("commodityId");
+    var comSpecInfoId = getParam("comSpecInfoId");
+    var ifStartId = getParam("ifStartId");
+    var saveWay = getParam("saveWay");
+    var referee = getParam("referee");
+    var commid;
+    var commnum;
+    //判断登录
+    var token = localStorage.getItem("authorization");
+    if (null == token || "" == token) {
+        location.href = "login.html?commodityId=" + commodityId + "&ifStartId=" + ifStartId + "&saveWay=" + saveWay + "$referee=" + referee;
+    } else {
+        //调商品详情填写订单
+        $.ajax({
+            url: "/api/commodity/fillOrder",
+            type: "POST",
+            dataType: "json",
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                "authorization": "" + token
+            },
+            data: {
+                comSpecInfoId: comSpecInfoId,
+                comcount: 1
+            },
+            success: function (res) {
+                var data = res.data;
+                if (data != null && null != data.list && 0 != data.list.length) {
+                    var com = data.list[0];
+                    console.log(com)
+                    $("#commid").text(com.name);
+                    $("#commguige").text(com.specName);
+                    $("#commprice").text(com.spelprice);
+                    $("#commnum").text(com.comcount);
+                    $("#realprice").text(com.spelprice);
+                    $("#youfei").text(data.freightAmount);
+                    commid = com.commodity_id;
+                    commnum = com.comcount;
+                }
+            },
+            error: function (data) {
+                // alert(data.msg_cn);
+            }
+        });
+    }
+
+    function submitOrder() {
+        //验证地址
+        var userOrderComArray = '[{"commodityId":' + commodityId + ',"comSpecInfoId":' + comSpecInfoId + ',"comnum": ' + commnum + '}]';
+        console.log(userOrderComArray)
+        //调提交订单接口
+        if($("#name").val()=="" | $("#name").val()==null){
+            alert("请输入收货人")
+            return false;
+        }else if ($("#telnum").val()=="" | $("#telnum").val()==null){
+            alert("请输入电话号码")
+            return false;
+        }else if ($("#address").val()=="" | $("#address").val()==null){
+            alert("请输入收货地址")
+            return false;
+        }
+        $.ajax({
+            url: "/api/commodity/joinOrder",
+            type: "POST",
+            dataType: "json",
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                "authorization": "" + token
+            },
+            data: {
+                "ifStartId": ifStartId,
+                "orderName": $("#name").val(),
+                "orderPhone": $("#telnum").val(),
+                "orderAddress": $("#address").val(),
+                "userOrderComArray": userOrderComArray
+            },
+            success: function (res) {
+    			console.log(res);
+    			alert(res.msg_cn);
+                localStorage.setItem('authorization', '');
+                window.location.href = "openapp.html?commodityId=" + commodityId;
+            },
+            error: function (data) {
+                alert(res);
+            }
+        });
+    }
+
+</script>
+</html>
